@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toposheet</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="product.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="site-header sticky-top py-1 ">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="index.html">
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg> -->
+            <div class=" h2">Toposheet Finder</div>
+        </a>
+        <a class="py-3 d-none d-md-inline-block" href="index.html">Home</a>
+        <a class="py-3 d-none d-md-inline-block " href="credits.html">Credits</a>
+        </div>
+    </nav>
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light ">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">Toposheet Finder</h1>
+        <p class="lead font-weight-normal">Enter Coordinates- the North and the East and BOOM. Get Toposheet values.</p>
+      </div>
+       <div class="product-device box-shadow d-none d-md-block"></div>
+      <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+    </div>
+
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+      <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div class="my-3 py-3">
+          <h2 class="display-5">Enter Coordinates</h2>
+          <p class="lead">Decimal coordinates??? Go first convert them!!!</p>
+        </div>
+        <p class="lead text-light">Values for India only.</p>            
+
+        <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 100%; border-radius: 21px 21px 0 0;">
+            <form class="container mt-10 text-dark">
+              <h3 class="display-5 pt-3">Latitute(North Coordinates)</h3>
+              <div class="form-row text-dark lead">
+                <div class="form-group col-md-4">
+                  <label for="northDegree">Degree</label>
+                  <input type="number" class="form-control" id="ndegree" placeholder="North Degree">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="northMinute">Minute</label>
+                  <input type="number" class="form-control" id="nminute" placeholder="North Minute">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="northSecond">Second</label>
+                  <input type="number" class="form-control" id="nsecond" placeholder="North Seconds">
+                </div>
+              </div>
+              
+              <h3 class="display-5 pt-3">Longitude(East Coordinates)</h3>
+              <div class="form-row text-dark lead">
+                <div class="form-group col-md-4">
+                  <label for="eastDegree">Degree</label>
+                  <input type="number" class="form-control" id="edegree" placeholder="East Degree">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="eastMinute">Minute</label>
+                  <input type="number" class="form-control" id="eminute" placeholder="East Minute">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="eastSecond">Second</label>
+                  <input type="number" class="form-control" id="esecond" placeholder="East Seconds">
+                </div>
+              </div>
+              <button type="button" class="btn btn-dark" onclick="calculate()">Calculate</button>
+            </form>
+            <br>
+            <div class="text-dark alert-dark mx-auto" id="answer" style="width: 50%; border-radius: 21px 21px 0 0;">
+                <h4 class="display-5">The Sheet Number is:</h4>
+                <span class="h1" id="topoNumber">a</span>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+    <footer class="container-fluid py-3 bg-dark">
+      <div class="row ">
+        <div class="col-md-6 ml-auto">
+            <label class="py-3 text-secondary lead">Disclaimer: All results are not correct. Please verify with the toposheet.</label>
+        </div>
+        <div class="col-md-2 ml-auto">
+         <a class="py-3 d-none d-md-inline-block text-secondary" href="index.html"> <div class="h5">Home</div></a>
+        </div>
+        <div class="col-md-2  ">
+         <a class="py-3 d-none d-md-inline-block text-secondary" href="credits.html"> <div class="h5">Credits</div></a>
+        </div>
+      </div>
+    </footer>
+
+</body>
+<script type="text/javascript">
+    document.querySelector('#answer').style.visibility = 'hidden';
+   // document.getElementById("topoNumber").innerHTML  = "54/A/22/NW";
+
+    function calculate(){ 
+        try{
+            var mothaNo = [[1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 0, 1, 0], [0, 1, 1, 1, 0, 0, 1, 0], [0, 1, 1, 1, 0, 0, 1, 0], [0, 1, 1, 1, 0, 0, 1, 0]];
+            var count = 37;
+            for (var i = 0; i < 8; i++) {
+                {
+                    for (var j = 0; j < 9; j++) {
+                        {
+                            if (mothaNo[j][i] !== 0) {
+                                mothaNo[j][i] = count;
+                                count++;
+                            }
+                        }
+                        ;
+                    }
+                }
+                ;
+            }
+            var alphabet = [['A', 'E', 'I', 'M'], ['B', 'F', 'J', 'N'], ['C', 'G', 'K', 'O'], ['D', 'H', 'L', 'P']];
+            var chotaNo = (function (dims) { var allocate = function (dims) { if (dims.length == 0) {
+                return 0;
+            }
+            else {
+                var array = [];
+                for (var i = 0; i < dims[0]; i++) {
+                    array.push(allocate(dims.slice(1)));
+                }
+                return array;
+            } }; return allocate(dims); })([4, 4]);
+            count = 1;
+            for (var i = 0; i < 4; i++) {
+                {
+                    for (var j = 0; j < 4; j++) {
+                        {
+                            chotaNo[j][i] = count;
+                            count++;
+                        }
+                        ;
+                    }
+                }
+                ;
+            }
+            var dir = [["NW", "NE"], ["SW", "SE"]];
+
+            var ndegree = document.getElementById("ndegree").value;
+            var nmin = document.getElementById("nminute").value;
+            var nsec = document.getElementById("nsecond").value;
+            var edegree = document.getElementById("edegree").value;
+            var emin = document.getElementById("eminute").value;
+            var esec = document.getElementById("esecond").value;
+            var rowMotha = ((ndegree / 4 | 0)) * 4;
+            var colMotha = ((edegree / 4 | 0)) * 4;
+            var mothaAns = mothaNo[(((40 - rowMotha) / 4 | 0)) - 1][(((colMotha - 68) / 4 | 0))];
+            var rowalpha = ndegree - rowMotha;
+            var colalpha = edegree - colMotha;
+            var alphaAns = alphabet[3 - rowalpha][colalpha];
+            var rowChota = (nmin / 15 | 0);
+            var colChota = (emin / 15 | 0);
+            var chotaAns = chotaNo[3 - rowChota][colChota];
+            var ndirmin = (((((nmin - rowChota * 15) + ((nsec / 10 | 0))) * 2) / 15 | 0));
+            var edirmin = ((((emin - colChota * 15) + ((esec / 10 | 0))) * 2 / 15 | 0));
+            var dirAns = dir[1 - ndirmin][edirmin];
+            
+            document.getElementById("topoNumber").innerHTML = mothaAns + " " + alphaAns + '/' + chotaAns + ' ' + dirAns;
+            document.querySelector('#answer').style.visibility = 'visible'; 
+            
+            console.info(mothaAns + " " + alphaAns + '/' + chotaAns + ' ' + dirAns);
+        }
+        catch(error){
+            alert("Enter valid values.");
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
